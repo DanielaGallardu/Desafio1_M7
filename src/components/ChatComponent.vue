@@ -21,7 +21,6 @@ export default {
       const url = 'https://randomuser.me/api/?results=2';
       const { data } = await axios.get(url);
 
-      // Se asignan los usuarios a los lados correspondientes
       this.userLeft = { ...data.results[0], side: 'left' };
       this.userRight = { ...data.results[1], side: 'right' };
     } catch (error) {
@@ -30,7 +29,6 @@ export default {
   },
   methods: {
     enviarMensaje(message, color, name, side) {
-      // Se agrega el mensaje enviado al array de mensajes
       this.messages.push({ message, color, name, side });
     }
   }
@@ -39,13 +37,12 @@ export default {
 
 <template>
   <div class="row chat-container">
-    <!-- Tarjeta del usuario izquierdo -->
+    <!-- Tarjeta izquierda -->
     <ChatCard :user="userLeft" @enviar-mensaje="enviarMensaje" v-if="Object.keys(userLeft).length > 0" />
 
-    <!-- Contenedor de los mensajes del chat -->
     <ChatMessage :messages="messages" />
 
-    <!-- Tarjeta del usuario derecho -->
+    <!-- Tarjeta derecha -->
     <ChatCard :user="userRight" @enviar-mensaje="enviarMensaje" v-if="Object.keys(userRight).length > 0" />
   </div>
 </template>
@@ -58,6 +55,5 @@ export default {
 
 .row {
   gap: 20px;
-  /* Espacio entre las columnas */
 }
 </style>

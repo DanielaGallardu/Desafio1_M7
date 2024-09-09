@@ -24,7 +24,7 @@ export default {
 
 <style scoped>
 .chatbox {
-  background-color: #dbd7d9;
+  background-color: #eed9e4;
   padding: 15px;
   border-radius: 8px;
   margin-bottom: 20px;

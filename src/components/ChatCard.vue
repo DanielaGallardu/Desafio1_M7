@@ -94,6 +94,5 @@ textarea {
 
 .btn-container {
   text-align: center;
-  /* Centra el botón dentro del formulario */
 }
 </style>

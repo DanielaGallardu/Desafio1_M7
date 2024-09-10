@@ -23,13 +23,9 @@ export default {
       return color;
     },
     enviarMensaje() {
-      // Al hacer clic en enviar, el color actual se envía con el mensaje
+
       this.$emit('enviar-mensaje', this.message, this.color, this.user.name.first, this.user.side);
-
-      // Limpiar el mensaje
       this.message = '';
-
-      // Generar un nuevo color aleatorio después de enviar el mensaje
       this.color = this.generarColorAleatorio();
     }
   },
@@ -45,10 +41,7 @@ export default {
       <div class="card-body">
         <h5 class="card-title">{{ user.name.first }} {{ user.name.last }}</h5>
         <form @submit.prevent="enviarMensaje" class="message-form">
-          <!-- Input de tipo color que muestra el color actual -->
           <input v-model="color" type="color" class="form-control" disabled />
-
-          <!-- Textarea para escribir el mensaje -->
           <textarea v-model="message" class="form-control" placeholder="Escribe tu mensaje..."></textarea>
 
           <div class="btn-container">

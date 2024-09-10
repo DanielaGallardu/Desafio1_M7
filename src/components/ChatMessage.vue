@@ -30,6 +30,9 @@ export default {
   margin-bottom: 20px;
   width: 80%;
   margin: 0 auto;
+  max-height: 300px;
+  overflow-y: auto;
+
 }
 
 .message {
@@ -38,7 +41,6 @@ export default {
 
 .left-message {
   text-align: left;
-
 }
 
 .right-message {

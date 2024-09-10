@@ -4,7 +4,7 @@ export default {
   data() {
     return {
       message: '',
-      color: '#000000'
+      color: this.generarColorAleatorio() // Color aleatorio inicial
     };
   },
   props: {
@@ -14,14 +14,28 @@ export default {
     }
   },
   methods: {
+    generarColorAleatorio() {
+      const letras = '0123456789ABCDEF';
+      let color = '#';
+      for (let i = 0; i < 6; i++) {
+        color += letras[Math.floor(Math.random() * 16)];
+      }
+      return color;
+    },
     enviarMensaje() {
+      // Al hacer clic en enviar, el color actual se envía con el mensaje
       this.$emit('enviar-mensaje', this.message, this.color, this.user.name.first, this.user.side);
+
+      // Limpiar el mensaje
       this.message = '';
-      this.color = '#000000';
+
+      // Generar un nuevo color aleatorio después de enviar el mensaje
+      this.color = this.generarColorAleatorio();
     }
   },
   emits: ['enviar-mensaje']
 };
+
 </script>
 
 <template>
@@ -30,14 +44,18 @@ export default {
       <img :src="user.picture.large" class="card-img-top rounded-circle" alt="User Picture" />
       <div class="card-body">
         <h5 class="card-title">{{ user.name.first }} {{ user.name.last }}</h5>
-
         <form @submit.prevent="enviarMensaje" class="message-form">
-          <input v-model="color" type="color" class="form-control" />
+          <!-- Input de tipo color que muestra el color actual -->
+          <input v-model="color" type="color" class="form-control" disabled />
+
+          <!-- Textarea para escribir el mensaje -->
           <textarea v-model="message" class="form-control" placeholder="Escribe tu mensaje..."></textarea>
+
           <div class="btn-container">
             <button type="submit" class="btn-enviar">Enviar</button>
           </div>
         </form>
+
       </div>
     </div>
   </div>
@@ -71,7 +89,7 @@ export default {
 }
 
 textarea {
-  width: 100%;
+  width: 90%;
   margin: 10px 0;
   padding: 8px;
   border-radius: 4px;
@@ -86,6 +104,7 @@ textarea {
   padding: 8px 12px;
   border-radius: 4px;
   cursor: pointer;
+  margin-bottom: 20px;
 }
 
 .btn-enviar:hover {
